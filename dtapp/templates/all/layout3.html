@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang ="en">
+<head>
+
+    <!-- Required meta tags -->
+   
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel = "stylesheet" type = "text/css"  href = "{{url_for('static', filename = 'bootstrap-4.5.0-dist/css/bootstrap.min.css')}}">
+   
+    <!-- Custom Stylesheet -->
+    <link rel ="stylesheet" type = "text/css" href = "{{url_for('static', filename = 'styling.css')}}">
+    {% if title %}
+      <title>{{title}} </title>
+    {% else %}
+      <title> Dashboards</title>
+    {% endif %}
+
+    <!--Favicon picture-->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='PCCI_logo/PCCI_Logo_Pioneering_2.ico') }}">
+   
+
+</head>
+<body>
+    <header class="site-header">
+        <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+          <div class="container">
+            <a class="navbar-brand mr-4" href="/" style="position:relative;left:5px;top:5px;" >
+              <img src="{{ url_for('static', filename='PCCI_logo/PCCI_Logo_White.ico') }}" width = "115" 
+              height = "40" alt = "PCCI Logo" style="position:relative;left:-5px;top:-8px;"> 
+              Dashboards {{version}} </a>
+            <div class="collapse navbar-collapse" id="navbarToggle">
+              <!-- Navbar Right Side -->
+              <div class="navbar-nav">
+                <a class="nav-item nav-link" href="/logout" style="position:relative;left:800px;top:0px;" >Logout</a>
+              </div>
+            </div>
+          </div>
+        </nav>
+    </header>
+    <main role="main" class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+            <div class = "alert alert-{{category}}">
+            {{ message }}
+            </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %} 
+        
+    </main>
+    
+  <!--Bootstrap JS-->
+  <script type = "text/js" src = "{{url_for('static', filename = 'bootstrap-4.5.0-dist/js/bootstrap.min.js')}}"> </script>
+</body>
+
+</html>

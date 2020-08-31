@@ -1,0 +1,61 @@
+{% extends "all/layout2.html" %}
+{% block content %}
+ 
+<div class = "column">
+    <img src="{{ url_for('static', filename='PCCI_logo/PCCI_Logo.ico') }}" width = "300" height = "100"
+           alt = "PCCI Logo" style = position:relative;left:300px;top:100px; > 
+  </div>
+
+<div class = "column"  >
+  <main role="main" class="container" style="position:relative;left:700px;top:0px;" size = "10" >
+    <div class="row" size = "10">
+      <div class="col-md-8" size = "10" >  
+        <p>If you don't have an account, please request permission <a href = "/registration" > to create one</a></p>    
+        <form autocomplete="off" method = "POST">   
+          {{form.hidden_tag()}} <!-- adding crsf token, hidden tag is part of the secret key encryption-->
+          <fieldset class = "form-group" >
+          <legend class = "border-bottom-mb-4"  ></legend>
+          <div class = "form-group"  >
+            {{form.username.label()}}
+            <br>
+            {{form.username(size = 30 )}}
+            </div>
+          <div class = "form-group" >
+            {{form.password.label()}}
+            <br>
+            {{form.password(size = 30 )}}
+          </div>
+          </fieldset>
+          <div class = "form-group">
+            {{form.submit(class = "btn btn-outline-info")}}
+          </div>
+        </form>
+        
+      </div>
+    </div>
+  </main>
+</div>
+
+
+    
+{% endblock content %}
+
+<!--- 
+<main role="main" class="container" style="position:relative;left:450px;top:0px;" >
+  <div class="row">
+    <div class="col-lg-8">
+      <p>Please login with your username/email and password</p>
+      <p>If you don't have an account, please request permission <a href = "/registration" > to create one </a></p>
+      <form autocomplete="off" method="POST">
+          <p>Username:</p>
+          <p><input type=text name=username></p>
+          <p>Password:</p>
+          <p><input type="password" id="pass" name="password"
+            minlength="4" required></p>
+          <p><input type=submit value=Login></p>
+      </form>
+    </div>
+  </div>
+</main>
+
+-->

@@ -1,0 +1,47 @@
+{% extends "all/layout3.html" %}
+{% block content %}
+
+<main role="main" class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <h4> Please note that all of the fields below are required to be filled. Title must be unique. </h4>
+      <div class="content-section" width = "300"> <!--File that hav ein main.css that will make look better-->
+        <form autocomplete="off" method = "POST" novalidate>  
+          {{form.hidden_tag()}} <!-- adding crsf token, hidden tag is part of the secret key encryption-->
+          <fieldset class = "form-group">
+            <legend class = "border-bottom-mb-4"></legend>   
+            <div class = "form-group">
+              {{form.dbcatg.label(class = "form-control-label")}}
+              {{form.dbcatg(class = "form-control form-control-lg")}}
+            </div>
+            <div class = "form-group">
+              {{form.dbtitle.label(class = "form-control-label")}}
+              {{form.dbtitle(class = "form-control form-control-lg")}}
+            </div>
+            <div class = "form-group">
+              {{form.ddate.label(class = "form-control-label")}}
+              {{form.ddate(class = "form-control form-control-lg")}}
+            </div>  
+            <div class = "form-group">
+              {{form.author.label(class = "form-control-label")}}
+              {{form.author(class = "form-control form-control-lg")}}
+            </div>  
+            <div class = "form-group">
+              {{form.enduser.label(class = "form-control-label")}}
+              {{form.enduser(class = "form-control form-control-lg")}}
+            </div>
+            <div class = "form-check">
+              {{form.externurl(class = "form-check form-check-input")}}
+              {{form.externurl.label(class = "form-control-label")}} 
+            </div>  
+          </fieldset>
+          <div class = "form-group">
+            {{form.submit(class = "btn btn-outline-info")}}
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+
+{% endblock content %}

@@ -1,0 +1,16 @@
+{% extends "all/layout3.html" %}
+{% block content %}
+    <h1>Enable Users</h1>
+    <br>
+    <p>Click the checkboxes below to enable users to login to their account:</p>
+    <br>
+    <br>
+    <form method = "POST">
+        {% for user in userinfo %}
+            <h5> <input type = "checkbox" value = "{{user}}" name = "usersenabled"> &nbsp {{user}}</h5>
+            <br>
+        {% endfor %}
+        <br>
+        <input type = "submit">
+    </form>    
+{% endblock content %}

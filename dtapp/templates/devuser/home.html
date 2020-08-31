@@ -1,0 +1,82 @@
+{% extends "all/layout.html" %}
+{% block content %}
+    <h1>My Dashboards</h1>
+    <br>
+    <script> var i = 0; var dashbfreq = {}; var dashbkey = ""; var alldashbs = [];  var idnum = 0; var val = false;</script>
+    {% for dashboard in dashboards %}
+        <script>
+        //Frequency dictionary of dashboard titles.
+        dashbkey = "{{dashboard.catg}}".toString();
+        if(dashbkey in dashbfreq){
+            dashbfreq[dashbkey].push(parseInt("{{dashboard.dashboardid}}"));
+            //document.write(parseInt("{{dashboard.dashboardid}}"));
+        }
+        else{
+            dashbfreq[dashbkey] = []
+            dashbfreq[dashbkey].push(parseInt("{{dashboard.dashboardid}}"));
+            //document.write(parseInt("{{dashboard.dashboardid}}"));
+        }
+        </script>
+    {% endfor %}
+
+    {% for dashboard in dashboards %}
+        <script>
+            //Copying dictionary from python to JS object in order to format output of dasboards on webpage correctly.
+            if("{{dashboard.externalurl}}" == "True"){
+                val = true;
+            }
+            else{
+                val = false;
+            }
+            alldashbs.push({"id":parseInt("{{dashboard.id}}"), "title": "{{dashboard.title}}".toString(),
+            "ddate": "{{dashboard.ddate.date()}}".toString(),"routes": "{{dashboard.routes}}".toString(),
+            "author": "{{dashboard.author}}".toString(), "enduser": "{{dashboard.enduser}}".toString(), "externalurl" : val, 
+            "catg" : "{{dashboard.catg}}".toString()});
+        </script>
+    
+    {% endfor %}
+    
+    <script>
+       //Formatting output of dashboards on enduser's home web page.
+       for (var dbcatg in dashbfreq){
+            idnum = parseInt(dashbfreq[dbcatg][0]);
+            if (dbcatg != "Other"){
+                // For testing purposes only (VI). Real dashboard titles will only have one route.
+                document.write("<h2>",dbcatg," </h2>");
+                var dashblen = dashbfreq[dbcatg].length;
+                for(i = 0; i < dashblen; i++){
+                    // Writing all dashboards with same title but different ids.
+                    idnum = dashbfreq[dbcatg][i];
+                    document.write("<p> Go to <a href =", alldashbs[idnum]["routes"] ,">",alldashbs[idnum]["title"] ," Dashboard </a> </p>");
+                    document.write("<p> Published by ",alldashbs[idnum]["author"]," on ",alldashbs[idnum]["ddate"]," </p>");
+                } 
+
+            }
+        }
+        //Ensuring all "other" dashboards are written last.
+        for (var dbcatg in dashbfreq){
+            if(dbcatg == "Other"){
+                document.write("<h2>",dbcatg," </h2>");
+                var dashblen = dashbfreq[dbcatg].length;
+                for(i = 0; i < dashblen; i++){
+                    // Writing all dashboards with same title but different ids.
+                    idnum = dashbfreq[dbcatg][i];
+                    document.write("<p> Go to <a href =", alldashbs[idnum]["routes"] ,">",alldashbs[idnum]["title"] ," Dashboard </a> </p>");
+                    document.write("<p> Published by ",alldashbs[idnum]["author"]," on ",alldashbs[idnum]["ddate"]," </p>");
+                } 
+            }
+        }
+        document.write("<br>");
+    </script>
+    <h1>DevOps</h1>
+    <br>
+    <!--password for jupyterhub dev is gman007-->
+    <p> Go to <a href = "http://pccidev.pccinnovation.org:9592/login?next=%2Ftree%3F" target="_blank"> Jupyter Hub Dev environment</a> </p>
+    <p> Go to <a href = "/workflow_automation" target="_blank">Workflow Automation</a> </p>
+    <p><a href="/insertdashb" > Embed dashboard page in web app</a></p>
+    <br>    
+    <h2> About Us </h2>
+    <p> Go to <a href = "/AboutUs"> About Us</a> </p>
+    <p> Last updated by PCCI on {{Aboutpbdate}} </p>
+
+{% endblock content %}

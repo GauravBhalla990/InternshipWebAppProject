@@ -1,0 +1,11 @@
+{% extends "all/layout2.html" %}
+{% block content %}
+
+<div class = "column"  >
+    <main role="main" class="container" >
+        <br>
+        <h2> You have logged out. Please close this window. </h2>
+        <p> Or, please sign in again <a href = "{{url_for('internal')}}" > here.</a></p>
+    </main>
+  </div>
+{% endblock content %}
