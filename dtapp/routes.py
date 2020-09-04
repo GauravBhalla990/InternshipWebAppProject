@@ -250,7 +250,7 @@ def enableusr():
 
 # Dev user routes.
 # Dev Login
-# only PCCI internal members can access this page
+# only internal members can access this page
 @app.route("/internal")
 def internal():
     """Step 1: User Authorization.
@@ -333,7 +333,7 @@ def callback():
   
 
       
-    # Logging common claims for PCCI Developer users from Azure AD and user from another directory. 
+    # Logging common claims for Devusers from Azure AD and user from another directory. 
     logging.info('Header = \n{}\n\n'.format(header))
     logging.info('Claims = \n{}\n\n'.format(claims))
     logging.info('name = {}'.format(claims['name']))
@@ -344,7 +344,7 @@ def callback():
     logging.info('iss = {}'.format(claims['iss']))
 
 
-    # Is user from PCCI developer Azure AD or from another directory?
+    # Is user from developers Azure AD or from another directory?
     idpval = True if ("idp" in claims) else False
 
     # Inserting audit information into the database or updating logging in time if user already there.
@@ -355,12 +355,12 @@ def callback():
         logging.info('email = {}'.format(email_addr))
         insert_auditlog(claims['name'], claims['email'], claims['given_name'],claims['family_name'], claims['ipaddr'], claims['unique_name'], claims['idp'])
     else:
-        logging.info(claims['name'] + " is internal PCCI user.")
+        logging.info(claims['name'] + " is internal user.")
         email_addr = claims['upn']
         logging.info('email = {}'.format(email_addr))
         insert_auditlog(claims['name'], claims['upn'], claims['given_name'],claims['family_name'], claims['ipaddr'], claims['unique_name']) 
 
-    # Connecting user acct from PCCI Azure AD or Another User directory to their account
+    # Connecting user acct from Azure AD or Another User directory to their account
     # in the web app.    
     session['username'] = getusrmail(email_addr) # return value is None if user not in DB.
     session['usertype'] = getusrtype(email_addr) # return value is None if user not in DB.
@@ -496,7 +496,7 @@ def logout():
     return redirect(url_for('index'))
 
 
-# Dashboard Apps and PCCI AboutUs App Routes:
+# Dashboard Apps and AboutUs App Routes:
 # About US is for all user types.
 @app.route("/AboutUs")
 def AboutUs():
