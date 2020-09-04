@@ -47,8 +47,7 @@ C:.
 │   │   ├───bootstrap-4.5.0-dist
 │   │   │   ├───css
 │   │   │   └───js
-│   │   └───PCCI_logo
+│   │   └───logo
 │   └───templates
 └───READthese
-        DBlogininfo.txt
         requirements.txt
