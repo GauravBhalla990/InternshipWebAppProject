@@ -11,7 +11,7 @@ try:
     logging.info("Getting information form config file for starting DB connection.")
     with open('dtapp/config/config.json') as f:
         data = json.load(f)
-        host = data["dbconfiginfo"]["host"] # Originally, was '10.117.112.75'
+        host = data["dbconfiginfo"]["host"]
         dbname = data["dbconfiginfo"]["dbname"] 
         schema = data["dbconfiginfo"]["schema"]
         username = data["dbconfiginfo"]["username"]
