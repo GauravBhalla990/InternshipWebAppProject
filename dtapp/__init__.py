@@ -28,7 +28,7 @@ level = logging.DEBUG,handlers = [MyRotatingFileHandler(filename = output_file, 
 # Setting port number and version for MVP Dashboard app
 with open('dtapp/config/config.json') as f:
     data = json.load(f)
-    portnum = data["server_url"]["portnum"] #change contents of config.json if the port is not 3001
+    portnum = data["server_url"]["portnum"] 
     dbappversion = data["appinfo"]["version"] #getting version of the dashboard app
     app.config['SECRET_KEY'] = data["appinfo"]["Secret_key"]  # App Secret Key can also be os.urandom(24) after importing os
     aboutpublishdt = data["appinfo"]["AboutUsDate"]
