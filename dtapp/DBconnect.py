@@ -88,7 +88,7 @@ try:
             usrs = [usr for usr in usrs['username']] # won't work if left as df must conver to list object in python.
             time_now = str(dt.datetime.now().strftime("%B %d, %Y %H:%M:%S.%f"))
             # If user doesn't exist yet, inserting all information from the claims response.
-            # For PCCI data scientists,
+            # For data scientists,
             if idp == False:
                 conn.execute("INSERT INTO dev.audit_log VALUES (%s, %s, %s, %s, %s, %s, %s, %s);",
                 (usrnm, email, given_name, None, family_name, ipaddr, uniquename, time_now))
